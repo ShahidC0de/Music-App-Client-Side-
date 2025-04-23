@@ -3,21 +3,19 @@ import 'package:client_side/features/auth/view/widgets/auth_gradient_button.dart
 import 'package:client_side/features/auth/view/widgets/custom_field.dart';
 import 'package:flutter/material.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({super.key});
+class Login extends StatefulWidget {
+  const Login({super.key});
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  State<Login> createState() => _LoginState();
 }
 
-class _SignUpState extends State<SignUp> {
-  final TextEditingController nameController = TextEditingController();
+class _LoginState extends State<Login> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   @override
   void dispose() {
-    nameController.dispose();
     emailController.dispose();
     passwordController.dispose();
     formKey.currentState!.validate();
@@ -36,7 +34,7 @@ class _SignUpState extends State<SignUp> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                'Sign Up.',
+                'Sign In.',
                 style: TextStyle(
                   color: Pallete.whiteColor,
                   fontWeight: FontWeight.bold,
@@ -44,11 +42,6 @@ class _SignUpState extends State<SignUp> {
                 ),
               ),
               const SizedBox(height: 30),
-              CustomField(
-                controller: nameController,
-                hintText: 'Name',
-              ),
-              const SizedBox(height: 15),
               CustomField(
                 controller: emailController,
                 hintText: 'Email',
@@ -61,17 +54,17 @@ class _SignUpState extends State<SignUp> {
               ),
               const SizedBox(height: 20),
               AuthGradientButton(
-                titleText: 'Sign Up',
+                titleText: 'Sign In',
                 onPressed: () {},
               ),
               const SizedBox(height: 20),
               RichText(
                   text: TextSpan(
-                      text: 'Already have an account? ',
+                      text: "Don't have an account? ",
                       style: Theme.of(context).textTheme.titleMedium,
                       children: const [
                     TextSpan(
-                        text: 'Sign In',
+                        text: 'Sign Up',
                         style: TextStyle(
                           color: Pallete.gradient1,
                           fontWeight: FontWeight.bold,

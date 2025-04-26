@@ -1,7 +1,10 @@
 import 'package:client_side/core/theme/app_pallete.dart';
+import 'package:client_side/features/auth/repositories/auth_remote_repositories.dart';
+import 'package:client_side/features/auth/view/pages/sign_up.dart';
 import 'package:client_side/features/auth/view/widgets/auth_gradient_button.dart';
 import 'package:client_side/features/auth/view/widgets/custom_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -55,21 +58,31 @@ class _LoginState extends State<Login> {
               const SizedBox(height: 20),
               AuthGradientButton(
                 titleText: 'Sign In',
-                onPressed: () {},
+                onPressed: () async {
+                  await AuthRemoteRepository().login(
+                      email: emailController.text,
+                      password: passwordController.text);
+                },
               ),
               const SizedBox(height: 20),
-              RichText(
-                  text: TextSpan(
-                      text: "Don't have an account? ",
-                      style: Theme.of(context).textTheme.titleMedium,
-                      children: const [
-                    TextSpan(
-                        text: 'Sign Up',
-                        style: TextStyle(
-                          color: Pallete.gradient1,
-                          fontWeight: FontWeight.bold,
-                        ))
-                  ]))
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const SignUp()));
+                },
+                child: RichText(
+                    text: TextSpan(
+                        text: "Don't have an account? ",
+                        style: Theme.of(context).textTheme.titleMedium,
+                        children: const [
+                      TextSpan(
+                          text: 'Sign Up',
+                          style: TextStyle(
+                            color: Pallete.gradient1,
+                            fontWeight: FontWeight.bold,
+                          ))
+                    ])),
+              )
             ],
           ),
         ),

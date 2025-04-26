@@ -13,6 +13,7 @@ class CustomField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       validator: (val) {
         if (val!.trim().isEmpty) return "$hintText is missing";
         return null;

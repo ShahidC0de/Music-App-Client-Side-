@@ -65,15 +65,15 @@ class _SignUpState extends State<SignUp> {
               AuthGradientButton(
                 titleText: 'Sign Up',
                 onPressed: () async {
-                  // Debugging: Check the values before making the request
-                  print(
-                      'Name: ${nameController.text}, Email: ${emailController.text}, Password: ${passwordController.text}');
-
-                  await AuthRemoteRepository().signUp(
+                  final response = await AuthRemoteRepository().signUp(
                     name: nameController.text,
                     email: emailController.text,
                     password: passwordController.text,
                   );
+                  //    final val = switch (response) {
+                  //   Left(value: final l) => l,
+                  //   Right(value: final r) => r.toString(),
+                  // };
                 },
               ),
               const SizedBox(height: 20),

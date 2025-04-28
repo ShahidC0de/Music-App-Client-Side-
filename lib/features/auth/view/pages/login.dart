@@ -59,9 +59,10 @@ class _LoginState extends State<Login> {
               AuthGradientButton(
                 titleText: 'Sign In',
                 onPressed: () async {
-                  await AuthRemoteRepository().login(
+                  final response = await AuthRemoteRepository().login(
                       email: emailController.text,
                       password: passwordController.text);
+                  print(response.toString());
                 },
               ),
               const SizedBox(height: 20),

@@ -70,6 +70,7 @@ class _SignUpState extends State<SignUp> {
                     email: emailController.text,
                     password: passwordController.text,
                   );
+                  print(response.toString());
                   //    final val = switch (response) {
                   //   Left(value: final l) => l,
                   //   Right(value: final r) => r.toString(),

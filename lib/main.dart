@@ -1,9 +1,10 @@
 import 'package:client_side/core/theme/theme.dart';
 import 'package:client_side/features/auth/view/pages/sign_up.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ProviderScope(child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

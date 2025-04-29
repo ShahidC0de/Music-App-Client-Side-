@@ -1,4 +1,5 @@
 import 'package:client_side/features/auth/model/user_model.dart';
+import 'package:client_side/features/auth/repositories/auth_local_repository.dart';
 import 'package:client_side/features/auth/repositories/auth_remote_repositories.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part "auth_viewmodel.g.dart";
@@ -6,9 +7,16 @@ part "auth_viewmodel.g.dart";
 @riverpod
 class AuthViewModel extends _$AuthViewModel {
   late AuthRemoteRepository _authRemoteRepository;
+  late AuthLocalRepository _authLocalRepository;
+  Future<void> initSharedPreferences() async {
+    await _authLocalRepository.init();
+  }
+
   @override
   AsyncValue<UserModel>? build() {
     _authRemoteRepository = ref.watch(authRemoteREpositoryProvider);
+    // ignore: avoid_manual_providers_as_generated_provider_dependency
+    _authLocalRepository = ref.watch(authLocalrepositoryProvider);
     return null;
   }
 
@@ -49,6 +57,11 @@ class AuthViewModel extends _$AuthViewModel {
     // };
     state = response.fold(
         (l) => AsyncValue.error(l.message, StackTrace.current),
-        (r) => AsyncValue.data(r));
+        (r) => _loginSuccess(r));
+  }
+
+  AsyncValue<UserModel>? _loginSuccess(UserModel user) {
+    _authLocalRepository.setToken(user.token);
+    return AsyncValue.data(user);
   }
 }

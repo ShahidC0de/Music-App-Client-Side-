@@ -6,17 +6,18 @@ part "auth_viewmodel.g.dart";
 
 @riverpod
 class AuthViewModel extends _$AuthViewModel {
-  late AuthRemoteRepository _authRemoteRepository;
-  late AuthLocalRepository _authLocalRepository;
+  late final AuthRemoteRepository _authRemoteRepository;
+  late final AuthLocalRepository _authLocalRepository;
   Future<void> initSharedPreferences() async {
+    _authLocalRepository = ref.watch(authLocalrepositoryProvider);
     await _authLocalRepository.init();
   }
 
   @override
   AsyncValue<UserModel>? build() {
     _authRemoteRepository = ref.watch(authRemoteREpositoryProvider);
-    // ignore: avoid_manual_providers_as_generated_provider_dependency
     _authLocalRepository = ref.watch(authLocalrepositoryProvider);
+    _authLocalRepository.init();
     return null;
   }
 

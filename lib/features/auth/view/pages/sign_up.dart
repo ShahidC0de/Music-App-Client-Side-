@@ -88,6 +88,8 @@ class _SignUpState extends ConsumerState<SignUp> {
                               name: nameController.text,
                               email: emailController.text,
                               password: passwordController.text);
+                        } else {
+                          showSnackBar(context, 'Fields missing');
                         }
                       },
                     ),

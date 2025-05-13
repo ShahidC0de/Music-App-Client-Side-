@@ -79,6 +79,8 @@ class _LoginState extends ConsumerState<Login> {
                           ref.read(authViewModelProvider.notifier).login(
                               email: emailController.text,
                               password: passwordController.text);
+                        } else {
+                          showSnackBar(context, 'Missing fields');
                         }
                       },
                     ),

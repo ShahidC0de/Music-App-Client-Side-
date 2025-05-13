@@ -6,8 +6,8 @@ part "auth_viewmodel.g.dart";
 
 @riverpod
 class AuthViewModel extends _$AuthViewModel {
-  late final AuthRemoteRepository _authRemoteRepository;
-  late final AuthLocalRepository _authLocalRepository;
+  late AuthRemoteRepository _authRemoteRepository;
+  late AuthLocalRepository _authLocalRepository;
   Future<void> initSharedPreferences() async {
     _authLocalRepository = ref.watch(authLocalrepositoryProvider);
     await _authLocalRepository.init();
@@ -71,6 +71,16 @@ class AuthViewModel extends _$AuthViewModel {
     state = AsyncValue.loading();
     final token = _authLocalRepository.getToken();
     if (token != null) {
-    } else {}
+      final response =
+          await _authRemoteRepository.getCurrentUserData(token: token);
+      return await response.fold((l) {
+        state = AsyncValue.error(l.message, StackTrace.current);
+        return null;
+      }, (r) {
+        AsyncValue.data(r);
+        return r;
+      });
+    }
+    return null;
   }
 }

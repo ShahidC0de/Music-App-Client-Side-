@@ -1,14 +1,17 @@
 import 'package:client_side/core/theme/theme.dart';
 import 'package:client_side/features/auth/view/pages/sign_up.dart';
+import 'package:client_side/features/auth/view_model/auth_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final container = ProviderContainer();
+  final notifier = container.read(authViewModelProvider.notifier);
+  await notifier.initSharedPreferences();
+  final usermodel = await notifier.getCurrentUserData();
 
-  // await container.read(authViewModelProvider.notifier).initSharedPreferences();
-  // no need for this because we are doing it now in build function of provider
+  print(usermodel);
   runApp(UncontrolledProviderScope(
     container: container,
     child: MyApp(),

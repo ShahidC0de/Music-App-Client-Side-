@@ -3,6 +3,7 @@ import 'package:client_side/core/theme/theme.dart';
 import 'package:client_side/features/auth/view/pages/sign_up.dart';
 import 'package:client_side/features/auth/view_model/auth_viewmodel.dart';
 import 'package:client_side/features/home/view/pages/home_page.dart';
+import 'package:client_side/features/home/view/pages/upload_song_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -29,6 +30,6 @@ class MyApp extends ConsumerWidget {
     return MaterialApp(
         title: 'Flutter Demo',
         theme: AppTheme.darkThemeMode,
-        home: currentUser == null ? SignUp() : HomePage());
+        home: currentUser == null ? SignUp() : UploadSongPage());
   }
 }

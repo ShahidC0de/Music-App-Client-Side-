@@ -5,6 +5,7 @@ import 'package:client_side/features/auth/view/pages/sign_up.dart';
 import 'package:client_side/features/auth/view/widgets/auth_gradient_button.dart';
 import 'package:client_side/features/auth/view/widgets/custom_field.dart';
 import 'package:client_side/features/auth/view_model/auth_viewmodel.dart';
+import 'package:client_side/features/home/view/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -33,8 +34,11 @@ class _LoginState extends ConsumerState<Login> {
       next?.when(
           data: (data) {
             showSnackBar(context, 'Welcome Back!');
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const Login()));
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const HomePage()),
+              (_) => false,
+            );
           },
           error: (error, str) {
             showSnackBar(context, error.toString());

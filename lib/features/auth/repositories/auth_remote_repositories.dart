@@ -69,11 +69,12 @@ class AuthRemoteRepository {
     required String token,
   }) async {
     try {
-      final response = await http.post(
-        Uri.parse('${ServerConstants.serverURL}/auth/login'),
+      print('token is: $token');
+      final response = await http.get(
+        Uri.parse('${ServerConstants.serverURL}/auth/'),
         headers: {
           'Content-Type': 'application/json',
-          'x-auth-toke': token,
+          'x-auth-token': token,
         },
       );
       final user = await jsonDecode(response.body) as Map<String, dynamic>;
